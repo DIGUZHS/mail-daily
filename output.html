@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Weather Card</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .love-weather-card {
+            background: #87CEEB;
+            width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+        .header {
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            color: #E0F7FA;
+            margin: -20px -20px 0 -20px;
+            transition: background-color 0.5s;
+            background: #87CEEB;
+        }
+        .weather-icon {
+            width: 120px;
+            height: 120px;
+            /*margin: 10px 0;*/
+            object-fit: contain;
+        }
+        .temperature {
+            font-size: 36px;
+            margin: 10px;
+
+            /*color: #333;*/
+        }
+        .description {
+            font-size: 16px;
+            color: #777;
+        }
+        .additional-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+        }
+        .additional-info div {
+            font-size: 14px;
+            color: #555;
+        }
+        .change-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .change-info img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        .change-info div {
+            font-size: 16px;
+            color: #555;
+        }
+        .love-section, .quote-section {
+            margin-bottom: 20px;
+        }
+        .love-section h2, .quote-section h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #ff6f61;
+        }
+        .love-days {
+            font-size: 50px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .quote {
+            font-size: 16px;
+            color: #555;
+            padding: 0 10px;
+        }
+         .transition {
+            /*margin: 20px 0;*/
+        }
+        .transition .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+        .transition .icons img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+        .transition .arrow {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .transition-text{
+            margin: 0 0 10px 0;
+            color: #555;
+        }
+        .info {
+            font-size: 13px;
+            color: #555;
+            padding: 0 10px;
+        }
+        .header h2{
+            text-align: right;
+            width: fit-content;
+            margin: 20px 50px 20px 0;
+            font-size: 40px;
+        }
+        .header h3{
+            /*width: 100%;*/
+            height: fit-content;
+            margin: 33px 70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="love-weather-card" class="love-weather-card">
+        <div id="header" class="header">
+            <div style="display: flex;align-items: center">
+                <img src="data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAdxJREFUWEftlkFKQzEQhmegV3EjCLoSXLXoISroJQpJl+qyCbxLKNhDKNaN4EpBcONVCqMJeWWa9mWSVFoXPigtJW/my//PTIKw4wd3nB/+AYoVsNZeOduIqA8A7uMfRLx230qpmxJbswGstX0icskXSbsSaa2z42YtdLsmIr/DH4AZIs4A4Fkp5b79E63xiuSoIQKEnT+1MktBOUiOEiKAMYZykzM1nF0eWoJIAhhjXBDn+UxrPSgprhZcelcCaHc/4H4Hz4+J6CSo86KUeo0BW4iUClkAcQBr7QUR3fKEiHiplLrj/20EwIpvRX5jzAMAnEY7ftRan20L4A0ADiOAd631UQTgawgRVyxcDLBUYXVJOJlM7hFxyN8loul4PD7fCkDTNAfz+XwKAPsh4Wev1xuORqOPX7PABZKKyBizF3r9K1YyVUNLxZuygE9BaaCsaUHRf9/C0nCpnITt2SEOMBEgxwq+iejs6Kz+rC5oF7GRLM720vGdpQBXIdXTNTWTDSAFL5W+yAJmhT+cQustwZdKXwXQZYWkTqrTsi1og6xLxlpVrPoYphiAqxCCuXth1aUlaxB1ycduPG6JOHC64lQpwO1wv+PbkjRds8+CkkC1azdSoDbpn1LgG9geNTCclBZbAAAAAElFTkSuQmCC" style="margin-left: 20px">
+                <h2>济南</h2>
+                <h3>17</h3>
+<!--                <div style="font-size: 20px">周日</div>-->
+            </div>
+
+            <div style="display: flex">
+                <div style="margin: 0 25px;">
+                    <img class="weather-icon" src="data:image/jpeg;base64, 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" alt="Weather Icon">
+                    <div class="description">多云</div>
+                </div>
+                <div style="width: 100%;">
+                    <div class="temperature">32°C</div>
+                    <div style="display: flex;font-size: 14px;color: #555; justify-content: center;">
+                        <div>最高37°&nbsp;&nbsp;</div>
+                        <div>最低24°</div>
+                    </div>
+           <div class="transition">
+                <div class="icons">
+                    <img src="data:image/jpeg;base64, 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" alt="Sunny Icon">
+<!--                    <span class="arrow">➡</span>-->
+                    <img src="data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAOtJREFUWEftlj0OgzAMhf22rj1R22t06yHCWjOC1849Cyfq3C1VKqUKIBojEhBSWEns7z3/AGjjBxvnpwJQHNi/AyJyJqKTmyZjTD13qhY70LatDZMCuBhjOi1IcgCXGABr3cgC4NVrQLICeJCqqibzrALwryxfAGY+MPNb2zjhuWETxmIMy4KmaZ4AbrGLKd+HEJirIBWIh3AALyI6pgqsjeP3BUTkaq19rAnRK4GWeOrczBJ2AOpwU641hqPEv2WV24HYNszpwKTq3scrhwMx1TkBVKqTArhgInLf7IdkaQkXN2EBKA7s3oEPLQ1iIaafs80AAAAASUVORK5CYII=" style="width: 32px;height: 32px;margin: 0 5px",>
+                    <img src="data:image/jpeg;base64, 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" alt="Cloudy Icon">
+                </div>
+                <div class="transition-text">多云转中雨</div>
+            </div>
+                </div>
+
+            </div>
+<!--            <div class="transition">-->
+<!--                <div class="icons">-->
+<!--                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Sunny Icon">-->
+<!--&lt;!&ndash;                    <span class="arrow">➡</span>&ndash;&gt;-->
+<!--                    <img src="image/jiantou.png" style="width: 32px;height: 32px">-->
+<!--                    <img src="https://openweathermap.org/img/wn/03d@2x.png" alt="Cloudy Icon">-->
+<!--                </div>-->
+<!--                <div class="transition-text">晴转多云</div>-->
+<!--            </div>-->
+<!--            <div class="additional-info">-->
+<!--                <div>湿度: 60%</div>-->
+<!--                <div>风速: 15 km/h</div>-->
+<!--            </div>-->
+<!--            <div class="additional-info">-->
+<!--                <div>Sunrise: 6:00 AM</div>-->
+<!--                <div>Sunset: 7:45 PM</div>-->
+<!--            </div>-->
+            <div class="info">白天天气较热，虽然有雨，但仍然无法削弱较高气温给人们带来的暑意，这种天气会让您感到不太舒适。</div>
+            <div class="info">紫外线强度较弱，建议出门前涂擦SPF在12-15之间、PA+的防晒护肤品。</div>
+        </div>
+        <div class="love-section">
+            <h2>我们在一起的第</h2>
+            <div class="love-days">17天</div>
+        </div>
+        <div class="quote-section">
+<!--            <h2>Love Quote</h2>-->
+            <div class="quote">游乐场那个旋转的，有音乐会转的是什么？木马？嗯，mua</div>
+        </div>
+    </div>
+
+    <script>
+        // 假设从API获得的天气描述
+        const weatherDescription = "Partly Cloudy"; // 这个值可以动态获取
+
+        const card = document.getElementById('love-weather-card');
+        const header = document.getElementById('header');
+
+        // 根据天气描述改变背景颜色
+        switch(weatherDescription.toLowerCase()) {
+            case 'clear':
+                header.style.backgroundColor = '#87CEEB'; // 天蓝色
+                card.style.backgroundColor = '#E0F7FA'; // 浅青色
+                break;
+            case 'cloudy':
+            case 'partly cloudy':
+                header.style.backgroundColor = '#B0C4DE'; // 灰蓝色
+                card.style.backgroundColor = '#F0F8FF'; // 淡蓝色
+                break;
+            case 'rainy':
+                header.style.backgroundColor = '#4682B4'; // 钢蓝色
+                card.style.backgroundColor = '#B0E0E6'; // 粉蓝色
+                break;
+            case 'stormy':
+                header.style.backgroundColor = '#2F4F4F'; // 深青色
+                card.style.backgroundColor = '#708090'; // 灰色
+                break;
+            case 'snowy':
+                header.style.backgroundColor = '#ADD8E6'; // 浅蓝色
+                card.style.backgroundColor = '#F0FFFF'; // 淡青色
+                break;
+            default:
+                header.style.backgroundColor = '#ffafbd'; // 默认颜色
+                card.style.backgroundColor = '#ffc3a0'; // 默认颜色
+        }
+    </script>
+</body>
+</html>

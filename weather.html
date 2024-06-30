@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Weather Card</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .love-weather-card {
+            background: ${card_color};
+            width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+        .header {
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            color: #E0F7FA;
+            margin: -20px -20px 0 -20px;
+            transition: background-color 0.5s;
+            background: ${header_color};
+        }
+        .weather-icon {
+            width: 120px;
+            height: 120px;
+            /*margin: 10px 0;*/
+            object-fit: contain;
+        }
+        .temperature {
+            font-size: 36px;
+            margin: 10px;
+
+            /*color: #333;*/
+        }
+        .description {
+            font-size: 16px;
+            color: #777;
+        }
+        .additional-info {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+        }
+        .additional-info div {
+            font-size: 14px;
+            color: #555;
+        }
+        .change-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .change-info img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+        .change-info div {
+            font-size: 16px;
+            color: #555;
+        }
+        .love-section, .quote-section {
+            margin-bottom: 20px;
+        }
+        .love-section h2, .quote-section h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #ff6f61;
+        }
+        .love-days {
+            font-size: 50px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .quote {
+            font-size: 16px;
+            color: #555;
+            padding: 0 10px;
+        }
+         .transition {
+            /*margin: 20px 0;*/
+        }
+        .transition .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+        .transition .icons img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+        .transition .arrow {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .transition-text{
+            margin: 0 0 10px 0;
+            color: #555;
+        }
+        .info {
+            font-size: 13px;
+            color: #555;
+            padding: 0 10px;
+        }
+        .header h2{
+            text-align: right;
+            width: fit-content;
+            margin:  0 50px 0 0;
+            font-size: 40px;
+        }
+        .header h3{
+            /*width: 100%;*/
+            height: fit-content;
+            margin: 20px 70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="love-weather-card" class="love-weather-card">
+        <div id="header" class="header">
+            <div style="display: flex;align-items: center">
+                <img src="data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAdxJREFUWEftlkFKQzEQhmegV3EjCLoSXLXoISroJQpJl+qyCbxLKNhDKNaN4EpBcONVCqMJeWWa9mWSVFoXPigtJW/my//PTIKw4wd3nB/+AYoVsNZeOduIqA8A7uMfRLx230qpmxJbswGstX0icskXSbsSaa2z42YtdLsmIr/DH4AZIs4A4Fkp5b79E63xiuSoIQKEnT+1MktBOUiOEiKAMYZykzM1nF0eWoJIAhhjXBDn+UxrPSgprhZcelcCaHc/4H4Hz4+J6CSo86KUeo0BW4iUClkAcQBr7QUR3fKEiHiplLrj/20EwIpvRX5jzAMAnEY7ftRan20L4A0ADiOAd631UQTgawgRVyxcDLBUYXVJOJlM7hFxyN8loul4PD7fCkDTNAfz+XwKAPsh4Wev1xuORqOPX7PABZKKyBizF3r9K1YyVUNLxZuygE9BaaCsaUHRf9/C0nCpnITt2SEOMBEgxwq+iejs6Kz+rC5oF7GRLM720vGdpQBXIdXTNTWTDSAFL5W+yAJmhT+cQustwZdKXwXQZYWkTqrTsi1og6xLxlpVrPoYphiAqxCCuXth1aUlaxB1ycduPG6JOHC64lQpwO1wv+PbkjRds8+CkkC1azdSoDbpn1LgG9geNTCclBZbAAAAAElFTkSuQmCC" style="margin-left: 20px">
+                <h2>济南</h2>
+                <h3>${week}</h3>
+<!--                <div style="font-size: 20px">周日</div>-->
+            </div>
+
+            <div style="display: flex">
+                <div style="margin: 0 25px;">
+                    <img class="weather-icon" src="data:image/jpeg;base64, ${weather_icon}" alt="Weather Icon">
+                    <div class="description">${weather}</div>
+                </div>
+                <div style="width: 100%;">
+                    <div class="temperature">${now_temperature}°C</div>
+                    <div style="display: flex;font-size: 14px;color: #555; justify-content: center;">
+                        <div>最高${max_temperature}°&nbsp;&nbsp;</div>
+                        <div>最低${min_temperature}°</div>
+                    </div>
+           <div class="transition">
+                <div class="icons">
+                    <img src="data:image/jpeg;base64, ${day_icon}" alt="Sunny Icon">
+<!--                    <span class="arrow">➡</span>-->
+                    <img src="data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAOtJREFUWEftlj0OgzAMhf22rj1R22t06yHCWjOC1849Cyfq3C1VKqUKIBojEhBSWEns7z3/AGjjBxvnpwJQHNi/AyJyJqKTmyZjTD13qhY70LatDZMCuBhjOi1IcgCXGABr3cgC4NVrQLICeJCqqibzrALwryxfAGY+MPNb2zjhuWETxmIMy4KmaZ4AbrGLKd+HEJirIBWIh3AALyI6pgqsjeP3BUTkaq19rAnRK4GWeOrczBJ2AOpwU641hqPEv2WV24HYNszpwKTq3scrhwMx1TkBVKqTArhgInLf7IdkaQkXN2EBKA7s3oEPLQ1iIaafs80AAAAASUVORK5CYII=" style="width: 32px;height: 32px;margin: 0 5px",>
+                    <img src="data:image/jpeg;base64, ${night_icon}" alt="Cloudy Icon">
+                </div>
+                <div class="transition-text">${text_day}转${text_night}</div>
+            </div>
+                </div>
+
+            </div>
+
+            <div class="info">${comfort}</div>
+            <div class="info">${uv}</div>
+        </div>
+        <div class="love-section">
+            <h2>我们在一起的第</h2>
+            <div class="love-days">${inday}天</div>
+        </div>
+        <div class="quote-section">
+<!--            <h2>Love Quote</h2>-->
+            <div class="quote">${qinghua}</div>
+        </div>
+    </div>
+
+
+</body>
+</html>
