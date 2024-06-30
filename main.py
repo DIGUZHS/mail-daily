@@ -58,39 +58,39 @@ def gat_weather_info():
     return weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, qinghau
 
 
-weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, qinghua = gat_weather_info()
-
-
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         return encoded_string.decode('utf-8')
 
-
-with open('weather.html', 'r', encoding='utf-8') as f:
-    con = f.read()
-variables = {
-    'card_color': '#E0F7FA',
-    'header_color': '#87CEEB',
-    'week': inday()[1],
-    'weather': weather,
-    'now_temperature': temperature,
-    'max_temperature': high,
-    'min_temperature': low,
-    'text_day': text_day,
-    'text_night': text_night,
-    'comfort': comfort,
-    'uv': uv,
-    'inday': inday()[0],
-    'qinghua': qinghua,
-    'weather_icon': image_to_base64('white/' + weather_code + '.png'),
-    'day_icon': image_to_base64('white/' + code_day + '.png'),
-    'night_icon': image_to_base64('white/' + code_night + '.png'),
-}
-template = string.Template(con)
-formatted_content = template.safe_substitute(variables)
-with open(str(datetime.today().strftime("%Y-%m-%d"))+'.html', 'w', encoding='utf-8') as file:
-    file.write(formatted_content)
+try:
+    weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, qinghua = gat_weather_info()
+    with open('weather.html', 'r', encoding='utf-8') as f:
+        con = f.read()
+    variables = {
+        'card_color': '#E0F7FA',
+        'header_color': '#87CEEB',
+        'week': inday()[1],
+        'weather': weather,
+        'now_temperature': temperature,
+        'max_temperature': high,
+        'min_temperature': low,
+        'text_day': text_day,
+        'text_night': text_night,
+        'comfort': comfort,
+        'uv': uv,
+        'inday': inday()[0],
+        'qinghua': qinghua,
+        'weather_icon': image_to_base64('white/' + weather_code + '.png'),
+        'day_icon': image_to_base64('white/' + code_day + '.png'),
+        'night_icon': image_to_base64('white/' + code_night + '.png'),
+    }
+    template = string.Template(con)
+    formatted_content = template.safe_substitute(variables)
+    with open('backups/' + str(datetime.today().strftime("%Y-%m-%d"))+'.html', 'w', encoding='utf-8') as file:
+        file.write(formatted_content)
+except Exception as e:
+    print(e)
 
 
 def send_email(sender_email, sender_password, receiver_email_list, subject, html):
