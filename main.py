@@ -53,9 +53,10 @@ def gat_weather_info():
     # suggestion
     comfort = suggestion_response['results'][0]['suggestion'][0]['comfort']['details']
     uv = suggestion_response['results'][0]['suggestion'][0]['uv']['details']
+    umbrella = suggestion_response['results'][0]['suggestion'][0]['umbrella']['details']
     # qinghua
     qinghau = qinghua_response['content']
-    return weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, qinghau
+    return weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, umbrella, qinghau
 
 
 def image_to_base64(image_path):
@@ -64,7 +65,7 @@ def image_to_base64(image_path):
         return encoded_string.decode('utf-8')
 
 try:
-    weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, qinghua = gat_weather_info()
+    weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, umbrella, qinghua = gat_weather_info()
     with open('weather.html', 'r', encoding='utf-8') as f:
         con = f.read()
     variables = {
@@ -78,7 +79,7 @@ try:
         'text_day': text_day,
         'text_night': text_night,
         'comfort': comfort,
-        'uv': uv,
+        'uv': umbrella,
         'inday': inday()[0],
         'qinghua': qinghua,
         'weather_icon': image_to_base64('white/' + weather_code + '.png'),
