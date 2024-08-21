@@ -1,19 +1,13 @@
+import base64
+import os
 import smtplib
+import string
+from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
-import string
+
 import requests
-import base64
-from datetime import datetime
-import os
-
-# os.environ['sender_email'] = 'dusk@mail.lovelxl.top'
-# os.environ['sender_pad'] = 'Pq3ctu7Uj8QTWU1vwnrR'
-# os.environ['receiver_emails'] = '2919408342@qq.com,3406485437@qq.com,3211983338@qq.com'
-# os.environ['city'] = 'jinan'
-# os.environ['start_day'] = '2024-06-13'
-
 
 sender_email = os.environ.get('SENDER_EMAIL')
 sender_pad = os.environ.get('SENDER_PAD')
@@ -25,7 +19,7 @@ receiver_email_list = receiver_emails.split(',')
 
 def inday(start_day):
     # 定义过去的某一天
-    #start_day = '2024-06-13'  # 使用 YYYY-MM-DD 格式
+    # start_day = '2024-06-13'  # 使用 YYYY-MM-DD 格式
     past_date = datetime.strptime(start_day, '%Y-%m-%d')
     # 获取今天的日期
     today = datetime.today()
@@ -36,10 +30,11 @@ def inday(start_day):
     days = int(delta.days) + 1
     return days, weekdays[weekday]
 
+
 def gat_weather_info(city):
-    now = 'https://api.seniverse.com/v3/weather/now.json?key=SzNe6EfEYEPXIC9qd&location='+ city +'&language=zh-Hans&unit=c'
-    daily = 'https://api.seniverse.com/v3/weather/daily.json?key=SzNe6EfEYEPXIC9qd&location='+ city +'&language=zh-Hans&unit=c&start=0&days=1'
-    suggestion = 'https://api.seniverse.com/v3/life/suggestion.json?key=SzNe6EfEYEPXIC9qd&location='+ city +'&language=zh-Hans&days=1'
+    now = 'https://api.seniverse.com/v3/weather/now.json?key=SzNe6EfEYEPXIC9qd&location=' + city + '&language=zh-Hans&unit=c'
+    daily = 'https://api.seniverse.com/v3/weather/daily.json?key=SzNe6EfEYEPXIC9qd&location=' + city + '&language=zh-Hans&unit=c&start=0&days=1'
+    suggestion = 'https://api.seniverse.com/v3/life/suggestion.json?key=SzNe6EfEYEPXIC9qd&location=' + city + '&language=zh-Hans&days=1'
     qinghau = 'https://api.uomg.com/api/rand.qinghua'
     now_response = requests.get(now).json()
     daily_response = requests.get(daily).json()
@@ -62,7 +57,6 @@ def gat_weather_info(city):
     umbrella = suggestion_response['results'][0]['suggestion'][0]['umbrella']['details']
     # qinghua
     qinghua = qinghua_response['content']
-    #return weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, umbrella, qinghau
     return {
         'weather': weather,
         'weather_code': weather_code,
@@ -79,10 +73,12 @@ def gat_weather_info(city):
         'qinghua': qinghua
     }
 
+
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         return encoded_string.decode('utf-8')
+
 
 def send_email(sender_email, sender_password, receiver_email_list, subject, html):
     # 设置SMTP服务器地址和端口
@@ -115,7 +111,6 @@ def send_email(sender_email, sender_password, receiver_email_list, subject, html
 
 try:
     weather_data = gat_weather_info(city)
-    #weather, weather_code, temperature, text_day, text_night, code_day, code_night, high, low, comfort, uv, umbrella, qinghua = gat_weather_info(city)
     with open('weather.html', 'r', encoding='utf-8') as f:
         con = f.read()
     variables = {
@@ -138,19 +133,12 @@ try:
     }
     template = string.Template(con)
     formatted_content = template.safe_substitute(variables)
-    with open('backups/' + str(datetime.today().strftime("%Y-%m-%d"))+'.html', 'w', encoding='utf-8') as file:
+    with open('backups/' + str(datetime.today().strftime("%Y-%m-%d")) + '.html', 'w', encoding='utf-8') as file:
         file.write(formatted_content)
 except Exception as e:
     print(e)
 
-
-
-# 使用示例
-# sender_email = 'dusk@mail.lovelxl.top'
-# sender_password = 'Pq3ctu7Uj8QTWU1vwnrR'
-# recipient_email = '2919408342@qq.com'
-subject = str(datetime.today().strftime("%Y-%m-%d"))+'今天也是爱宝宝的一天'
-
+subject = str(datetime.today().strftime("%Y-%m-%d")) + '今天也是爱宝宝的一天'
 
 with open('weather.html', 'r', encoding='utf-8') as html_file:
     html_content = html_file.read()
