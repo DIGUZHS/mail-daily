@@ -31,3 +31,9 @@ jobs:
     - name: Run weather Report
       run: |
         python main.py
+      env:
+        SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+        SENDER_PAD: ${{ secrets.SENDER_PAD }}
+        RECEIVER_EMAILS: ${{ secrets.RECEIVER_EMAILS }}
+        START_DAY: ${{ secrets.START_DAY }}
+        CITY: ${{ secrets.CITY }}
